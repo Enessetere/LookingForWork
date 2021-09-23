@@ -1,12 +1,14 @@
 package com.enessetere.lfw.review;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Map;
 import java.util.Objects;
 
 @Setter(value = AccessLevel.PRIVATE)
+@Getter
 public class Note {
     private Map<String, Short> notes;
     private double average;
