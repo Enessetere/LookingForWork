@@ -4,40 +4,52 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.UUID;
+
 @Setter(value = AccessLevel.PRIVATE)
 @Getter
+@Entity(name = "reviews")
 public class Review {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
+    private UUID idx;
+
+    @Column(name = "author")
     private String author;
-    private String message;
+
+    @Column(name = "review")
+    private String review;
     //TODO: to merge with note branch
+    @Column(name = "note")
     private String note;
 
-    private Review() {}
+    protected Review() {}
 
     public static class Builder {
-        private Review review;
+        private final Review review;
 
         public Builder() {
-            review = new Review();
+            this.review = new Review();
         }
 
         public Builder author(String author) {
-            review.setAuthor(author);
+            this.review.setAuthor(author);
             return this;
         }
 
-        public Builder message(String message) {
-            review.setMessage(message);
+        public Builder review(String review) {
+            this.review.setReview(review);
             return this;
         }
 
         public Builder note(String note) {
-            review.setNote(note);
+            this.review.setNote(note);
             return this;
         }
 
         public Review build() {
-            return review;
+            return this.review;
         }
     }
 }
